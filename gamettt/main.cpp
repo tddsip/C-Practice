@@ -3,7 +3,10 @@
 using namespace std;
 
 char ttt[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
-string s1, s2;
+char tt2[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
+char s1[20], s2[20];
+char hoi;
+
 int kt()
 {
 	if (ttt[0][0] == 'X' && ttt[0][1] == 'X' && ttt[0][2] == 'X' || ttt[1][0] == 'X' && ttt[1][1] == 'X' && ttt[1][2] == 'X' || ttt[2][0] == 'X' && ttt[2][1] == 'X' && ttt[2][2] == 'X' ||
@@ -17,6 +20,7 @@ int kt()
 	else if (ttt[0][0] != '1' && ttt[0][1] != '2' && ttt[0][2] != '3' && ttt[1][0] != '4' && ttt[1][1] != '5' && ttt[1][2] != '6' && ttt[2][0] != '7' && ttt[2][1] != '8' && ttt[2][2] != '9')
 		return 3;
 }
+
 void run()
     {
 	
@@ -149,25 +153,34 @@ void run()
 			break;
 		}
 	}while (true);
-	system("pause");
-
-
+	
 }
 int main() {
 	int p;
 	cout << "Welcome To Tic-tac-toe game! Play with your way!";
-	cout << "If you find any problem, please contact john.nguyen@gameloft.com\n";
+	cout << "If you find any problem, please contact truongddsip@gmail.com\n";
 	cout << "\n\nSELECT YOUR MODE(1 - PLAY GAME, OTHERS - EXIT GAME)\n";
 	cin >> p;
 	switch (p)
 	{
 	case 1: 
-		cout << "nhap ten nguoi choi 1 : "; cin >> s1;
-		cout << "\nnhap ten nguoi choi 2 : ";  cin >> s2;
+		cout << "nhap ten nguoi choi 1 :  "; cin >> s1;
+		cout << "\nnhap ten nguoi choi 2 :  ";  cin >> s2;
 		system("CLS");
-		run(); break;
+		do {
+			run();
+			cout << "tro choi ket thuc !\n"; 
+			cout << "ban co muon choi tiep khong (y/n)!";
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+					ttt[i][j] = tt2[i][j];
+			}
+			cin >> hoi;
+		} while (hoi == 'y');
+		break;
 	default:
 		break;
 	}
-	
+	system("pause");
 }
