@@ -1,30 +1,33 @@
 #include<iostream>
-#include<string>
 using namespace std;
 
-char ttt[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
-char tt2[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
-char s1[20], s2[20];
-char hoi;
+char square[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
+char square2[3][3] = { '1','2', '3', '4', '5', '6', '7', '8', '9' };
+char player1[20], player2[20];
+char question;
+char temp;
+int row, column;
+int input;
 
-int kt()
+
+int check()
 {
-	if (ttt[0][0] == 'X' && ttt[0][1] == 'X' && ttt[0][2] == 'X' || ttt[1][0] == 'X' && ttt[1][1] == 'X' && ttt[1][2] == 'X' || ttt[2][0] == 'X' && ttt[2][1] == 'X' && ttt[2][2] == 'X' ||
-	ttt[0][0] == 'X' && ttt[1][0] == 'X' && ttt[2][0] == 'X' || ttt[0][1] == 'X' && ttt[1][1] == 'X' && ttt[2][1] == 'X' || ttt[0][2] == 'X' && ttt[1][2] == 'X' && ttt[2][2] == 'X' ||
-	ttt[0][0] == 'X' && ttt[1][1] == 'X' && ttt[2][2] == 'X' || ttt[2][0] == 'X' && ttt[1][1] == 'X' && ttt[0][2] == 'X')
+	if (square[0][0] == 'X' && square[0][1] == 'X' && square[0][2] == 'X' || square[1][0] == 'X' && square[1][1] == 'X' && square[1][2] == 'X' || square[2][0] == 'X' && square[2][1] == 'X' && square[2][2] == 'X' ||
+	square[0][0] == 'X' && square[1][0] == 'X' && square[2][0] == 'X' || square[0][1] == 'X' && square[1][1] == 'X' && square[2][1] == 'X' || square[0][2] == 'X' && square[1][2] == 'X' && square[2][2] == 'X' ||
+	square[0][0] == 'X' && square[1][1] == 'X' && square[2][2] == 'X' || square[2][0] == 'X' && square[1][1] == 'X' && square[0][2] == 'X')
 	    return 1;
-	else if (ttt[0][0] == 'O' && ttt[0][1] == 'O' && ttt[0][2] == 'O' || ttt[1][0] == 'O' && ttt[1][1] == 'O' && ttt[1][2] == 'O' || ttt[2][0] == 'X' && ttt[2][1] == 'X' && ttt[2][2] == 'X' ||
-		ttt[0][0] == 'O' && ttt[1][0] == 'O' && ttt[2][0] == 'O' || ttt[0][1] == 'O' && ttt[1][1] == 'O' && ttt[2][1] == 'O' || ttt[0][2] == 'X' && ttt[1][2] == 'X' && ttt[2][2] == 'X' ||
-		ttt[0][0] == 'O' && ttt[1][1] == 'O' && ttt[2][2] == 'O' || ttt[2][0] == 'O' && ttt[1][1] == 'O' && ttt[0][2] == 'O')
+	else if (square[0][0] == 'O' && square[0][1] == 'O' && square[0][2] == 'O' || square[1][0] == 'O' && square[1][1] == 'O' && square[1][2] == 'O' || square[2][0] == 'X' && square[2][1] == 'X' && square[2][2] == 'X' ||
+		square[0][0] == 'O' && square[1][0] == 'O' && square[2][0] == 'O' || square[0][1] == 'O' && square[1][1] == 'O' && square[2][1] == 'O' || square[0][2] == 'X' && square[1][2] == 'X' && square[2][2] == 'X' ||
+		square[0][0] == 'O' && square[1][1] == 'O' && square[2][2] == 'O' || square[2][0] == 'O' && square[1][1] == 'O' && square[0][2] == 'O')
 		return 2;
-	else if (ttt[0][0] != '1' && ttt[0][1] != '2' && ttt[0][2] != '3' && ttt[1][0] != '4' && ttt[1][1] != '5' && ttt[1][2] != '6' && ttt[2][0] != '7' && ttt[2][1] != '8' && ttt[2][2] != '9')
+	else if (square[0][0] != '1' && square[0][1] != '2' && square[0][2] != '3' && square[1][0] != '4' && square[1][1] != '5' && square[1][2] != '6' && square[2][0] != '7' && square[2][1] != '8' && square[2][2] != '9')
 		return 3;
 }
 
-void run()
+void playgame()
     {
 	
-	cout << "\n\nXin chao " << s1 << " va " << s2;
+	cout << "\n\nHello " << player1 << " and " << player2;
 	cout << endl << endl << endl << endl << endl;
 	cout << "     TIC TAC TOE\n\n\n\n";
 	for (int i = 0; i <3; i++)
@@ -32,152 +35,85 @@ void run()
 		cout << "     ";
 		for (int j = 0; j <3; j++)
 		{
-			cout << ttt[i][j] << " | ";
+			cout << square[i][j] << " | ";
 		}
 		cout << "\n     -----------\n";
 	}
-	int dem = 0;
-	
+	int count = 0;
 	do{
-		char s;
-		int a, b, n;
-		if (dem % 2 == 0)
+		if (count % 2 == 0)
 		{
-			s = 'X';
-			cout << "\n\nToi luot " << s1 <<"\n\nmoi chon o : ";
-			cin >> n;
+			temp = 'X';
+			cout << "\n\nTurn " << player1 <<"\n\nplease choose : ";
+			cin >> input;
 		}
 		else  
 		{
-			s = 'O';
-			cout << "\n\nToi luot " << s2 <<"\n\nmoi chon o : ";
-			cin >> n;
+			temp = 'O';
+			cout << "\n\nTurn " << player2 <<"\n\nplease choose : ";
+			cin >> input;
 		}
-		
-		switch (n)
+		row = input / 10 -1 ;
+		column = input % 10 -1 ;
+		if (square[row][column] != 'X' && square[row][column] != 'O') 
 		{
-		case 1: a = 0; b = 0;
-			if (ttt[a][b] == '1')
+			square[row][column] = temp;
+			count++;
+			system("CLS");
+			cout << "\n\nHello " << player1 << " and " << player2;
+			cout << endl << endl << endl << endl << endl;
+			cout << "     TIC TAC TOE\n\n\n\n";
+			for (int i = 0; i <3; i++)
 			{
-				ttt[a][b] = s;
-				dem++;
+				cout << "     ";
+				for (int j = 0; j <3; j++)
+				{
+					cout << square[i][j] << " | ";
+				}
+				cout << "\n     -----------\n";
 			}
-			break;
-		case 2: a = 0; b = 1;
-			if (ttt[a][b] == '2')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 3: a = 0; b = 2;
-			if (ttt[a][b] == '3')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 4: a = 1; b = 0;
-			if (ttt[a][b] == '4')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 5: a = 1; b = 1;
-			if (ttt[a][b] == '5')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 6: a = 1; b = 2;
-			if (ttt[a][b] == '6')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 7: a = 2; b = 0;
-			if (ttt[a][b] == '7')
-			{
-				ttt[a][b] = s;
-				dem++;
-
-			}
-			break;
-		case 8: a = 2; b = 1;
-			if (ttt[a][b] == '8')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-			break;
-		case 9: a = 2; b = 2;
-			if (ttt[a][b] == '9')
-			{
-				ttt[a][b] = s;
-				dem++;
-			}
-
-			break;
-		default:
+		}
+		//system("CLS");
+		if (check() == 1)
+		{
+			cout << player1 << " win !\n";
 			break;
 		}
-		system("CLS");
-		cout << "\n\nXin chao " << s1 << " va " << s2;
-		cout << endl << endl << endl << endl << endl;
-		cout << "     TIC TAC TOE\n\n\n\n";
-		for (int i = 0; i <3; i++)
+		else if (check() == 2)
 		{
-			cout << "     ";
-			for (int j = 0; j <3; j++)
-			{
-				cout << ttt[i][j] << " | ";
-			}
-			cout << "\n     -----------\n";
-		}
-		if (kt() == 1)
-		{
-			cout << s1 << " win\n";
+			cout << player2 << " win !\n";
 			break;
 		}
-		else if (kt() == 2)
+		else if (check() == 3)
 		{
-			cout << s2 << " win\n";
-			break;
-		}
-		else if (kt() == 3)
-		{
-			cout << "hoa\n";
+			cout << "Draw\n";
 			break;
 		}
 	}while (true);
-	
 }
 int main() {
-	int p;
+	int run;
 	cout << "Welcome To Tic-tac-toe game! Play with your way!";
 	cout << "If you find any problem, please contact truongddsip@gmail.com\n";
 	cout << "\n\nSELECT YOUR MODE(1 - PLAY GAME, OTHERS - EXIT GAME)\n";
-	cin >> p;
-	switch (p)
+	cin >> run;
+	switch (run)
 	{
 	case 1: 
-		cout << "nhap ten nguoi choi 1 :  "; cin >> s1;
-		cout << "\nnhap ten nguoi choi 2 :  ";  cin >> s2;
+		cout << "Enter Player 1 Name:  "; cin >> player1;
+		cout << "\Enter Player 2 Name:  ";  cin >> player2;
 		system("CLS");
 		do {
-			run();
-			cout << "tro choi ket thuc !\n"; 
-			cout << "ban co muon choi tiep khong (y/n)!";
+			playgame();
+			cout << "End game !\n"; 
+			cout << "Do you want to continue (y/n)?";
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
-					ttt[i][j] = tt2[i][j];
+					square[i][j] = square2[i][j];
 			}
-			cin >> hoi;
-		} while (hoi == 'y');
+			cin >> question;
+		} while (question == 'y');
 		break;
 	default:
 		break;
