@@ -47,11 +47,11 @@ int main()
 	case 4: 
 		switch (LoadFile(&listSt))
 	  {
-		case 5: cout << "Load file to List Failed. Try it!\n";
+		case 5: cout << "Load file Failed!\n";
 		   break;
-	    case 6: cout << "File empty!\n";
+	    case 6:  cout << "Load file success!\n";
 		   break;
-	    case 7: cout << "Load file to List success!\n";
+	    case 7: cout << "File empty!\n";
 		   break;
 	    default:
 		   break;
@@ -97,6 +97,8 @@ void Input(int n, vector<Student>  &listSt)
 			cin.get();
 			if (checkScore(temp.score) == -1) 
 				break;
+			cout << "invalid number entered, press any key to try again!\n";
+			system("pause>NULL");
 		} while (checkScore(temp.score) == 1);
 		listSt.push_back(temp);
 	}
@@ -113,7 +115,7 @@ int checkID(int ID, vector<Student> listSt)
 }
 int checkScore(float score)
 {
-	if (score < 0 && score > 10) return 1;
+	if (score < 0 || score > 10) return 1;
 	else return -1;
 }
 void Output(vector<Student>  &listSt)
